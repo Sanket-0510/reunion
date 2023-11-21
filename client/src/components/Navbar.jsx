@@ -31,12 +31,12 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white font-serif">
-      <nav className="mx-auto flex items-center justify-between p-6 lg:px-8 lg:w-full" aria-label="Global">
+    <header className="bg-white">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-10 w-auto" src="https://pbs.twimg.com/profile_images/1489869939725209600/losbWRhe_400x400.jpg" alt="" />
+            <img className="h-15 w-14" src="https://media.licdn.com/dms/image/C4E0BAQGztnafvmikYA/company-logo_200_200/0/1644048490840/reunion_one_logo?e=2147483647&v=beta&t=6_1HS-marM2LiAOeQR5NBiCc2za-OR8NACGH9foQG-A" alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">

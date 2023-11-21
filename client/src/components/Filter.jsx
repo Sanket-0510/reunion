@@ -1,8 +1,8 @@
 import React from 'react';
-import { RangeSlider } from 'flowbite-react';
 import Test from './Test'
 const Filter = () => {
   return (
+    <div>
     <div className="flex p-4 border rounded-md shadow-md justify-around font-serif text-black-600 font-bold focus:outline-none">
       <div className="flex flex-col mr-4 text-black-600">
         <label htmlFor="location" className="font-medium mb-1">Select Location</label>
@@ -36,6 +36,7 @@ const Filter = () => {
       <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-24 h-10">
         Apply
       </button>
+    </div>
     </div>
   );
 };
