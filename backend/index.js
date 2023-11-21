@@ -17,7 +17,12 @@ connection();
 
 //routes
 const userRouter = require("./routes/user")
+const propertyRouter = require("./routes/property")
 app.use("/", userRouter)
+app.use("/property", propertyRouter)
+
+
+
 app.listen( port, ()=>{
     console.log(`listening at ${port}`)
 })

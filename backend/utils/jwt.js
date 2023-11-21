@@ -11,4 +11,10 @@ async function createJwtToken(user){
     return token
 
 }
-module.exports= {createJwtToken}
+
+async function verifyJwt(token){
+  const payload = jwt.verify(token, process.env.SECRETE_KEY)
+  return payload
+}
+
+module.exports= {createJwtToken, verifyJwt}

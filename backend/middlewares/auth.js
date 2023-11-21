@@ -1,29 +1,26 @@
-const jwt = require('jsonwebtoken'); // Import the 'jsonwebtoken' module
-const {verifyJwt} =require("../util")
-const auth = async (req, res, next) => {
-  try {
-   
-    const token =
-      req.cookies.token ||
-      req.body.token ||
-      (req.headers.authorization && req.headers.authorization.replace("Bearer ", ""));
-    if (!token) {
-      return res.status(401).json({ success: false, message: `Token Missing` });
-    }
+const { verifyJwt } = require("../utils/jwt.js");
 
+const auth = async (req, res, next) => {
     try {
-      const decode = await verifyJwt(token)
-      req.user = decode;
-      next();
+        const token =  (req.headers.authorization && req.headers.authorization.replace("Bearer ", ""));
+        console.log("Here");
+        console.log(req.headers.authorization);
+
+        if (!token) {
+            return res.status(401).json({ success: false, message: `Token Missing` });
+        }
+
+        const decoded = await verifyJwt(token);
+        req.user = decoded;
+        next();
     } catch (error) {
-      return res.status(401).json({ success: false, message: "Token is invalid" });
+        console.error(error);
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({ success: false, message: "Token is invalid" });
+        } else {
+            return res.status(401).json({ success: false, message: `Something went wrong while validating the token` });
+        }
     }
-  } catch (error) {
-    return res.status(401).json({
-      success: false,
-      message: `Something Went Wrong While Validating the Token`,
-    });
-  }
 };
 
 module.exports = { auth };
