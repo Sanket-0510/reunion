@@ -1,14 +1,27 @@
-const express = require('express')
+const express = require("express");
 
 const propertyRouter = express.Router();
-const {handlePropertySearch ,handleAddProperty ,handleListAllProperties, handleGetListedPropertyByUser}= require("../controllers/property")
-const {auth} = require("../middlewares/auth")
+const {
+  handlePropertySearch,
+  handleAddProperty,
+  handleListAllProperties,
+  handleGetListedPropertyByUser,
+  handleDeleteProperty,
+  handleUpdateProperty,
+} = require("../controllers/property");
+const { auth } = require("../middlewares/auth");
 
-propertyRouter.get("/list-properties",handleListAllProperties)
+propertyRouter.get("/list-properties", handleListAllProperties);
 
-propertyRouter.post("/search-property", handlePropertySearch)
+propertyRouter.post("/search-property", handlePropertySearch);
 
-propertyRouter.post("/add-property",auth, handleAddProperty)
+propertyRouter.post("/add-property", auth, handleAddProperty);
 
-propertyRouter.get("/my-properties", auth, handleGetListedPropertyByUser)
-module.exports = propertyRouter
+propertyRouter.get("/my-properties", auth, handleGetListedPropertyByUser);
+
+propertyRouter.delete("/:id", auth, handleDeleteProperty);
+
+propertyRouter.patch("/:id", auth, handleUpdateProperty);
+
+
+module.exports = propertyRouter;

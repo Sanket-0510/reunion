@@ -73,7 +73,7 @@ const handleDeleteProperty = async (req, res) => {
   try {
     const propertyId = req.params.id;
     const deletedProperty = await Property.findByIdAndDelete(propertyId);
-
+     
     if (!deletedProperty) {
       return res
         .status(404)
