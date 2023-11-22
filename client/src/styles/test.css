@@ -1,5 +1,4 @@
-
-  body .card {
+body .card {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,7 +11,7 @@
     background: #fff;
     overflow: hidden;
   }
-  body .card h2 {
+body .card h2 {
     margin-bottom: 40px;
   }
   body .card .current-value {

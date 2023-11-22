@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect} from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 import {
   ArrowPathIcon,
@@ -28,7 +28,19 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
+  }, []);
+  const handleLogout = () => {
+    // Clear token from localStorage
+    localStorage.removeItem('token');
+    // Update isLoggedIn state to reflect the user being logged out
+    setIsLoggedIn(false);
+  };
+
 
   return (
     <header className="bg-white">
@@ -112,10 +124,27 @@ export default function Navbar() {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
+      {isLoggedIn ? (
+        <a href="/profile" className="text-sm font-semibold leading-6 text-gray-900">
+          Profile <span aria-hidden="true">&rarr;</span>
+        </a>
+      
+      ) : (
+        <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+          Log in <span aria-hidden="true">&rarr;</span>
+        </a>
+      )}
+    </div>
+    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+      {isLoggedIn ? (
+         <a href="/" onClick={handleLogout} className="text-sm font-semibold leading-6 text-gray-900">
+         Logout <span aria-hidden="true">&rarr;</span>
+       </a>
+      
+      ) : (
+        ""
+      )}
+    </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />

@@ -1,6 +1,38 @@
-import React from 'react';
 
-const PropertyCard = () => {
+import React, { useState, useEffect } from 'react';
+
+const PropertyCard = (props) => {
+  const [user, setUser] = useState({});
+
+  const fetchRealtor = async () => {
+    try {
+      const result = await fetch(`http://${process.env.REACT_APP_URL}/get-userDetails`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: props.property.user
+        })
+      });
+
+      if (result.ok) {
+        const data = await result.json();
+        setUser(data);
+        console.log(data);
+      } else {
+        throw new Error('Failed to fetch user details');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchRealtor();
+  
+  }, [props.property.user]); 
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex items-center justify-center">
@@ -14,9 +46,9 @@ const PropertyCard = () => {
               </div>
             </div>
             <div className="p-4">
-              <p className="uppercase tracking-wide text-sm font-bold text-gray-700">Detached house • 5y old</p>
+              <p className="uppercase tracking-wide text-sm font-bold text-gray-700">{props.property.propertyName}</p>
               <p className="text-3xl text-gray-900">$750,000</p>
-              <p className="text-gray-700">742 Evergreen Terrace</p>
+              <p className="text-gray-700">{props.property.location}</p>
             </div>
             <div className="flex p-4 border-t border-gray-300 text-gray-700">
               <div className="flex-1 inline-flex items-center">
@@ -33,12 +65,12 @@ const PropertyCard = () => {
               </div>
             </div>
             <div className="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
-              <div className="text-xs uppercase font-bold text-gray-600 tracking-wide">Realtor</div>
+              <div className="text-xs uppercase font-bold text-gray-600 tracking-wide">{user.name}</div>
               <div className="flex items-center pt-2">
                 <div className="bg-cover bg-center w-10 h-10 rounded-full mr-3" style={{ backgroundImage: 'url(https://via.placeholder.com/50x50)' }}>
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900">Catherine Heffner</p>
+                  <p className="font-bold text-gray-900">{user.name}</p>
                   <p className="text-sm text-gray-700">(111) 111-1111</p>
                 </div>
               </div>

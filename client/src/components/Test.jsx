@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import "../styles/test.css";
-
+import { useContext } from "react";
+import { DataContext } from "../context/dataContext";
 const Test = () => {
-
+  const { setInputMinG, setInputMaxG } = useContext(DataContext);
   const [sliderWidth, setSliderWidth] = useState(0);
   const [offsetSliderWidth, setOffsetSliderWidth] = useState(0);
   const [min, setMin] = useState(0);
@@ -17,15 +18,18 @@ const Test = () => {
   const sliderRef = useRef(null);
   const maxValueRef = useRef(null);
 
-useEffect(() => {
+  useEffect(() => {
     minValueRef.current.style.width = `${(currentMin * 100) / max}%`;
     maxValueRef.current.style.width = `${(currentMax * 100) / max}%`;
 
     setSliderWidth(sliderRef.current.offsetWidth);
     setOffsetSliderWidth(sliderRef.current.offsetLeft);
-  }, [currentMin, currentMax, max]);
 
-const setMinValue = (e) => {
+    // Update Context API state when inputMin or inputMax changes
+    setInputMinG(inputMin); // Update inputMinG
+    setInputMaxG(inputMax); // Update inputMaxG
+  }, [currentMin, currentMax, max, inputMin, inputMax]);
+  const setMinValue = (e) => {
     const inputMin = e.target.value;
     setInputMin(inputMin);
 
@@ -35,7 +39,7 @@ const setMinValue = (e) => {
     }
   };
 
-const changeMinValue = (e) => {
+  const changeMinValue = (e) => {
     e.preventDefault();
     document.addEventListener("mousemove", onMouseMoveMin);
     document.addEventListener("mouseup", onMouseUpMin);
@@ -43,7 +47,7 @@ const changeMinValue = (e) => {
     document.addEventListener("touchend", onMouseUpMin);
   };
 
-const onMouseMoveMin = (e) => {
+  const onMouseMoveMin = (e) => {
     const dragedWidht = e.clientX - offsetSliderWidth;
     const dragedWidhtInPercent = (dragedWidht * 100) / sliderWidth;
     const newCurrentMin = parseInt((max * dragedWidhtInPercent) / 100);
@@ -55,14 +59,14 @@ const onMouseMoveMin = (e) => {
     }
   };
 
-const onMouseUpMin = () => {
+  const onMouseUpMin = () => {
     document.removeEventListener("mouseup", onMouseUpMin);
     document.removeEventListener("mousemove", onMouseMoveMin);
     document.removeEventListener("touchend", onMouseUpMin);
     document.removeEventListener("touchmove", onMouseMoveMin);
   };
 
-const setMaxValue = (e) => {
+  const setMaxValue = (e) => {
     const inputMax = e.target.value;
     setInputMax(inputMax);
 
@@ -72,7 +76,7 @@ const setMaxValue = (e) => {
     }
   };
 
-const changeMaxValue = (e) => {
+  const changeMaxValue = (e) => {
     e.preventDefault();
     document.addEventListener("mousemove", onMouseMoveMax);
     document.addEventListener("mouseup", onMouseUpMax);
@@ -80,7 +84,7 @@ const changeMaxValue = (e) => {
     document.addEventListener("touchend", onMouseUpMax);
   };
 
-const onMouseMoveMax = (e) => {
+  const onMouseMoveMax = (e) => {
     const dragedWidht = e.clientX - offsetSliderWidth;
     const dragedWidhtInPercent = (dragedWidht * 100) / sliderWidth;
     const newCurrentMax = Math.abs(
@@ -94,22 +98,22 @@ const onMouseMoveMax = (e) => {
     }
   };
 
-const onMouseUpMax = () => {
+  const onMouseUpMax = () => {
     document.removeEventListener("mouseup", onMouseUpMax);
     document.removeEventListener("mousemove", onMouseMoveMax);
     document.removeEventListener("touchend", onMouseUpMax);
     document.removeEventListener("touchmove", onMouseMoveMax);
   };
 
-const maxForMin = () => {
+  const maxForMin = () => {
     return currentMax - minValueBetween;
   };
 
-const minForMax = () => {
+  const minForMax = () => {
     return currentMin + minValueBetween;
   };
 
-return (
+  return (
     <div className="card">
       <h2>Double range slider</h2>
       <div className="current-value">

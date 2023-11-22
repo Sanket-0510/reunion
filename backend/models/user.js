@@ -44,10 +44,11 @@ const userSchema = new mongoose.Schema({
 userSchema.static("matchPassword", async function(email,password){
     const user = await this.findOne({email})
 
-    if (!user)  res.json({mssg: "user not found"})
+    if (!user)  return 0
     const salt = user.salt
     const providedPassword = createHmac("sha256", salt).update(password).digest("hex")
-    if(!providedPassword===user.password) throw new Error ("incorrect password")
+    console.log(providedPassword, user.password)
+    if(!(providedPassword===user.password)) return 0
     const token = await createJwtToken(user)
     return token
     
