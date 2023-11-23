@@ -52,7 +52,7 @@ const UserProfile = () => {
         const token = localStorage.getItem("token")
         const id = _id;
         const response = await fetch(
-          `http://${process.env.REACT_APP_URL}/property/${id}`,
+          `${process.env.REACT_APP_URL}/property/${id}`,
           {
             method: "GET",
             headers: {

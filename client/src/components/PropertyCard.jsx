@@ -6,7 +6,7 @@ const PropertyCard = (props) => {
 
   const fetchRealtor = async () => {
     try {
-      const result = await fetch(`http://${process.env.REACT_APP_URL}/get-userDetails`, {
+      const result = await fetch(`${process.env.REACT_APP_URL}/get-userDetails`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

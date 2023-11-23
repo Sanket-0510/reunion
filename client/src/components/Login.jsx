@@ -7,7 +7,7 @@ export default function Login() {
     const navigation = useNavigate();
     const handleLogin = async () => {
       try {
-        const result = await fetch(`http://localhost:8000/login`, {
+        const result = await fetch(`${process.env.REACT_APP_URL}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

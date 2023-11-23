@@ -21,7 +21,7 @@ const navigation = useNavigate()
 
   const handleSignup = async () => {
     try {
-      const result = await fetch(`http://${process.env.REACT_APP_URL}/signup`, {
+      const result = await fetch(`${process.env.REACT_APP_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

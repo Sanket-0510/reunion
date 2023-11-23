@@ -29,7 +29,7 @@ const Home = () => {
     const fetchingData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/property/list-properties",
+          `${process.env.REACT_APP_URL}/property/list-properties`,
           {
             headers: {
               "Content-Type": "application/json",
