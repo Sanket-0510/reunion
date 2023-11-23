@@ -226,6 +226,16 @@ export default function Navbar() {
         </a>
       )}
               </div>
+              <div className="py-6">
+              {isLoggedIn ? (
+         <a href="/" onClick={handleLogout} className="text-sm font-semibold leading-6 text-gray-900">
+         Logout <span aria-hidden="true">&rarr;</span>
+       </a>
+      
+      ) : (
+        ""
+      )}
+              </div>
             </div>
           </div>
         </Dialog.Panel>
