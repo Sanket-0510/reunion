@@ -84,7 +84,7 @@ const UserProfile = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+      <div className="max-w-6xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md flex flex-col justify-center items-center">
         {/* User Icon */}
         <div className="flex justify-center mb-4">
           <Avatar>
@@ -94,7 +94,7 @@ const UserProfile = () => {
 
         {/* User Details */}
         <div className="mb-4">
-          <p className="text-lg font-semibold">{name}</p>
+          <p className="text-2xl font-semibold">{name}</p>
           <p className="text-gray-600">{email}</p>
           <p className="text-gray-600">{number}</p>
         </div>
@@ -102,18 +102,20 @@ const UserProfile = () => {
         {/* Toggle Properties */}
         <div className="flex justify-center mb-4">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+            className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none w-25 h-10"
             onClick={() => setShowProperties(!showProperties)}
           >
             {showProperties ? "Hide Properties" : "Show Properties"}
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> {/* Adjusted grid layout for responsiveness */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-100 h-100"> {/* Increased gap value */}
           {/* Map properties into PropertyCard components */}
           {showProperties &&
             properties.map((property, index) => (
-              <PropertyCard key={index} property={property}></PropertyCard>
+              <div key={index} className="p-2 bg-gray-100 rounded-lg mb-4"> {/* Wrapper div with Tailwind classes */}
+              <PropertyCard property={property}></PropertyCard>
+            </div>
             ))}
         </div>
       </div>
