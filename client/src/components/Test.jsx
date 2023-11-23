@@ -11,8 +11,8 @@ const Test = () => {
   const [minValueBetween, setMinValueBetween] = useState(10);
   const [currentMin, setCurrentMin] = useState(0);
   const [inputMin, setInputMin] = useState(0);
-  const [currentMax, setCurrentMax] = useState(3000);
-  const [inputMax, setInputMax] = useState(3000);
+  const [currentMax, setCurrentMax] = useState(10000);
+  const [inputMax, setInputMax] = useState(10000);
 
   const minValueRef = useRef(null);
   const sliderRef = useRef(null);
