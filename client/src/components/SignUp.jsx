@@ -44,86 +44,79 @@ const navigation = useNavigate()
   
   return (
     <>
-      <div class="bg-grey-lighter min-h-screen flex flex-col font-serif">
-        <Navbar></Navbar>
-        <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-          <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-            <input
-              type="text"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="name"
-              placeholder="Full Name"
-              onChange={handleChange}
-            />
+      <div className="bg-white min-h-screen flex flex-col font-serif">
+      <Navbar />
+      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div className="bg-white px-6 py-8 rounded shadow-md text-black w-half">
+          <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+          <input
+            type="text"
+            className="block border border-gray-300 w-full p-3 rounded mb-4"
+            name="name"
+            placeholder="Full Name"
+            onChange={handleChange}
+          />
 
-            <input
-              type="text"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="number"
-              placeholder="Contact Number"
-              onChange={handleChange}
-            />
+          <input
+            type="text"
+            className="block border border-gray-300 w-full p-3 rounded mb-4"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+          />
 
-            <input
-              type="password"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="confirm_password"
-              placeholder="Confirm Password"
-            />
+          <input
+            type="text"
+            className="block border border-gray-300 w-full p-3 rounded mb-4"
+            name="number"
+            placeholder="Contact Number"
+            onChange={handleChange}
+          />
 
-            <button
-              type="submit"
-              class="w-full text-center py-3 rounded bg-indigo-600 text-white hover:bg-blue-700 focus:outline-none my-1"
-              onClick={handleSignup}
-            >
-              Create Account
-            </button>
+          <input
+            type="password"
+            className="block border border-gray-300 w-full p-3 rounded mb-4"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
 
-            <div class="text-center text-sm text-grey-dark mt-4">
-              By signing up, you agree to the
-              <a
-                class="no-underline border-b border-grey-dark text-grey-dark"
-                href="#"
-              >
-                Terms of Service
-              </a>{" "}
-              and
-              <a
-                class="no-underline border-b border-grey-dark text-grey-dark"
-                href="#"
-              >
-                Privacy Policy
-              </a>
-            </div>
-          </div>
+          <input
+            type="password"
+            className="block border border-gray-300 w-full p-3 rounded mb-4"
+            name="confirm_password"
+            placeholder="Confirm Password"
+          />
 
-          <div class="text-grey-dark mt-6">
-            Already have an account?
-            <a
-              class="no-underline border-b border-blue text-blue"
-              href="/login"
-            >
-              Log in
+          <button
+            type="submit"
+            className="w-full text-center py-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none my-1"
+            onClick={handleSignup}
+          >
+            Create Account
+          </button>
+
+          <div className="text-center text-sm text-gray-600 mt-4">
+            By signing up, you agree to the{" "}
+            <a className="border-b border-gray-600" href="#">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a className="border-b border-gray-600" href="#">
+              Privacy Policy
             </a>
-            .
           </div>
         </div>
+
+        <div className="text-gray-600 mt-6">
+          Already have an account?{" "}
+          <a className="border-b border-blue-500" href="/login">
+            Log in
+          </a>
+          .
+        </div>
       </div>
+    </div>
     </>
   );
 };

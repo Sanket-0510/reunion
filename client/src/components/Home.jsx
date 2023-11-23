@@ -3,9 +3,12 @@ import Navbar from "./Navbar";
 import Filter from "./Filter";
 import PropertyCard from "./PropertyCard";
 import { DataContext } from "../context/dataContext";
-
+import Info from "./Info";
+import Footer from "./Footer";
 const Home = () => {
   const {
+    clickedFilter,
+    setclickedFilter,
     isFiltered,
     setisFiltered,
     location,
@@ -19,66 +22,60 @@ const Home = () => {
     propertyType,
     setPropertyType,
   } = useContext(DataContext);
-  const temp = useContext(DataContext)
+
   const [properties, setProperties] = useState([]);
 
-  useEffect(()=>{
-    console.log(temp)
-  },[isFiltered])
-
-  const fetchingData = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8000/property/list-properties",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(isFiltered)
-      if (isFiltered) {
-        const filteredData = data.filter((property) => {
-          const milisecDate = new Date(property.date).getTime();
-          const dateMili = new Date(date).getTime();
-          return (
-            property.location === location &&
-            milisecDate <= dateMili &&
-            property.rentPerMonth >= inputMinG &&
-            property.rentPerMonth <= inputMaxG &&
-            property.type === propertyType
-          );
-        });
-        console.log(data)
-        console.log(filteredData)
-        setProperties(filteredData);
-      } else {
-        setProperties(data);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
+    const fetchingData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/property/list-properties",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        
+        if (isFiltered) {
+          const filteredData = data.filter((property) => {
+            const exactLocation = property.location.split(",");
+            return (
+              exactLocation.includes(location) &&
+              property.rentPerMonth <= inputMaxG &&
+              property.rentPerMonth >= inputMinG
+            );
+          });
+          setProperties(filteredData);
+        } else {
+          setProperties(data);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
     fetchingData();
-  }, [isFiltered]);
+  }, [clickedFilter]);
 
   return (
     <div className="min-h-screen flex flex-col justify-center">
       <Navbar />
-      <div className="flex-1 flex flex-col ml-20">
-        <h1 className="text-black-600 font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-serif mb-8">
-          Search Properties For Rent  
-        </h1>
-        <Filter />
-      </div>
-      <div className="flex justify-center ml-20">
-        {properties.map((property, index) => (
-          <PropertyCard key={index} property={property}></PropertyCard>
-        ))}
-      </div>
+      <div className="flex-1 flex flex-col ml-0 p-4 bg-white">
+  <h1 className="text-gray-800 font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-serif mb-8">
+    Search Properties For Rent
+  </h1>
+  <Filter />
+</div>
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ml-0 bg-gray-100 p-4">
+  {properties.map((property, index) => (
+    <PropertyCard key={index} property={property}></PropertyCard>
+  ))}
+</div>
+
+      <Info></Info>
+      <Footer></Footer>
     </div>
   );
 };

@@ -7,12 +7,12 @@ const Test = () => {
   const [sliderWidth, setSliderWidth] = useState(0);
   const [offsetSliderWidth, setOffsetSliderWidth] = useState(0);
   const [min, setMin] = useState(0);
-  const [max, setMax] = useState(200);
+  const [max, setMax] = useState(40000);
   const [minValueBetween, setMinValueBetween] = useState(10);
-  const [currentMin, setCurrentMin] = useState(55);
-  const [inputMin, setInputMin] = useState(55);
-  const [currentMax, setCurrentMax] = useState(100);
-  const [inputMax, setInputMax] = useState(100);
+  const [currentMin, setCurrentMin] = useState(0);
+  const [inputMin, setInputMin] = useState(0);
+  const [currentMax, setCurrentMax] = useState(3000);
+  const [inputMax, setInputMax] = useState(3000);
 
   const minValueRef = useRef(null);
   const sliderRef = useRef(null);
@@ -115,7 +115,7 @@ const Test = () => {
 
   return (
     <div className="card">
-      <h2>Double range slider</h2>
+      <h2>Price Range slider</h2>
       <div className="current-value">
         <label htmlFor="min-input">Min: </label>
         <input

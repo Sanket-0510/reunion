@@ -24,7 +24,7 @@ body .card h2 {
   }
   body .card .current-value input {
     margin: 0;
-    max-width: 40px;
+    max-width: 60px;
     margin-bottom: 5px;
     font-size: 16px;
     color: white;
