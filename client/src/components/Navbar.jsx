@@ -215,12 +215,16 @@ export default function Navbar() {
                 </a>
               </div>
               <div className="py-6">
-                <a
-                  href="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
+              {isLoggedIn ? (
+        <a href="/profile" className="text-sm font-semibold leading-6 text-gray-900">
+          Profile <span aria-hidden="true">&rarr;</span>
+        </a>
+      
+      ) : (
+        <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+          Log in <span aria-hidden="true">&rarr;</span>
+        </a>
+      )}
               </div>
             </div>
           </div>
