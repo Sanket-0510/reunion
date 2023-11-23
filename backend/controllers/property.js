@@ -1,6 +1,5 @@
 const Property = require("../models/property");
 
-
 //search property ---public route
 const handlePropertySearch = async (req, res) => {
   const { location } = req.body;
@@ -12,7 +11,6 @@ const handlePropertySearch = async (req, res) => {
     res.status(500).json({ mssg: "internal server error" });
   }
 };
-
 
 //list all the properties -- a public route
 const handleListAllProperties = async (req, res) => {
@@ -31,8 +29,8 @@ const handleAddProperty = async (req, res) => {
 
     const {
       propertyName,
+      propertyType,
       rentPerMonth,
-      address,
       location,
       numberOfBedrooms,
       bathrooms,
@@ -40,8 +38,8 @@ const handleAddProperty = async (req, res) => {
     } = req.body;
     const newProperty = new Property({
       propertyName,
+      propertyType,
       rentPerMonth,
-      address,
       location,
       numberOfBedrooms,
       bathrooms,
@@ -58,22 +56,24 @@ const handleAddProperty = async (req, res) => {
 
 //get listed property by the user
 const handleGetListedPropertyByUser = async (req, res) => {
-  const user = req.user._id;
+  const userId = req.params.id;
+
   try {
-    const property = await Property.find({ user });
-    res.json(property);
-  } catch (e) {
-    console.log(e);
+    const properties = await Property.find({ user: userId });
+
+    res.json(properties);
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 //delete property
 const handleDeleteProperty = async (req, res) => {
   try {
     const propertyId = req.params.id;
     const deletedProperty = await Property.findByIdAndDelete(propertyId);
-     
+
     if (!deletedProperty) {
       return res
         .status(404)
@@ -93,7 +93,6 @@ const handleDeleteProperty = async (req, res) => {
   }
 };
 
-
 //update property
 const handleUpdateProperty = async (req, res) => {
   try {
@@ -101,6 +100,7 @@ const handleUpdateProperty = async (req, res) => {
 
     const {
       propertyName,
+      propertyType,
       rentPerMonth,
       address,
       location,
@@ -111,6 +111,7 @@ const handleUpdateProperty = async (req, res) => {
 
     const updatedProperty = {
       propertyName,
+      propertyType,
       rentPerMonth,
       address,
       location,

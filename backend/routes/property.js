@@ -17,7 +17,7 @@ propertyRouter.post("/search-property", handlePropertySearch);
 
 propertyRouter.post("/add-property", auth, handleAddProperty);
 
-propertyRouter.get("/my-properties", auth, handleGetListedPropertyByUser);
+propertyRouter.get("/:id", auth, handleGetListedPropertyByUser);
 
 propertyRouter.delete("/:id", auth, handleDeleteProperty);
 

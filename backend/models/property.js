@@ -5,12 +5,12 @@ const propertySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    rentPerMonth: {
-        type: Number,
+    propertyType:{
+        type: String,
         required: true
     },
-    address: {
-        type: String,
+    rentPerMonth: {
+        type: Number,
         required: true
     },
     location: {
