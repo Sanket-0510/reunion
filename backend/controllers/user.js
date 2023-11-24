@@ -62,10 +62,8 @@ const handleGetUserDetails = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-
-    // Assuming 'name' is a field in the 'user' object
     res.json({
-      name: user.name // Directly access the 'name' property of the 'user' object
+      name: user.name 
     });
   } catch (e) {
     console.log(e);

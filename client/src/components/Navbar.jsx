@@ -32,12 +32,10 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
+    setIsLoggedIn(!!token);
   }, []);
   const handleLogout = () => {
-    // Clear token from localStorage
     localStorage.removeItem('token');
-    // Update isLoggedIn state to reflect the user being logged out
     setIsLoggedIn(false);
   };
 

@@ -24,10 +24,8 @@ const Test = () => {
 
     setSliderWidth(sliderRef.current.offsetWidth);
     setOffsetSliderWidth(sliderRef.current.offsetLeft);
-
-    // Update Context API state when inputMin or inputMax changes
-    setInputMinG(inputMin); // Update inputMinG
-    setInputMaxG(inputMax); // Update inputMaxG
+    setInputMinG(inputMin); 
+    setInputMaxG(inputMax); 
   }, [currentMin, currentMax, max, inputMin, inputMax]);
   const setMinValue = (e) => {
     const inputMin = e.target.value;

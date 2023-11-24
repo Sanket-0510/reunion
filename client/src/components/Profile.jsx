@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PropertyCard from "./PropertyCard"; // Replace this with your property component
+import PropertyCard from "./PropertyCard";
 import Navbar from "./Navbar";
 import { jwtDecode } from "jwt-decode"
 import { useNavigate } from "react-router-dom";
@@ -92,14 +92,11 @@ const UserProfile = () => {
           </Avatar>
         </div>
 
-        {/* User Details */}
         <div className="mb-4">
           <p className="text-2xl font-semibold">{name}</p>
           <p className="text-gray-600">{email}</p>
           <p className="text-gray-600">{number}</p>
         </div>
-
-        {/* Toggle Properties */}
         <div className="flex justify-center mb-4">
           <button
             className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none w-25 h-10"
@@ -109,11 +106,10 @@ const UserProfile = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-100 h-100"> {/* Increased gap value */}
-          {/* Map properties into PropertyCard components */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-100 h-100">
           {showProperties &&
             properties.map((property, index) => (
-              <div key={index} className="p-2 bg-gray-100 rounded-lg mb-4"> {/* Wrapper div with Tailwind classes */}
+              <div key={index} className="p-2 bg-gray-100 rounded-lg mb-4"> 
               <PropertyCard property={property}></PropertyCard>
             </div>
             ))}

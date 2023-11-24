@@ -19,15 +19,13 @@ export default function Login() {
         });
     
         if (result.ok) {
-          // Parsing the response assuming it's in JSON format
           const data = await result.json();
           console.log(data);
    
-          localStorage.setItem('token', data.token); // Replace 'token' with your token key
+          localStorage.setItem('token', data.token); 
           navigation("/")
 
         } else {
-          // Handle unsuccessful login (e.g., show error message)
           console.log('Login failed');
           alert("wrong credentials")
           setEmail("")
@@ -36,7 +34,6 @@ export default function Login() {
         }
       } catch (e) {
         console.log(e);
-        // Handle fetch error
       }
     };
     

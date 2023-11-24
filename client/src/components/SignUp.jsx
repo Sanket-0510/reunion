@@ -33,12 +33,10 @@ const navigation = useNavigate()
         navigation("/login")
         
       } else {
-        // Handle the error when the response is not okay (e.g., 404, 500, etc.)
         console.error('Server responded with an error:', result.status);
       }
     } catch (e) {
       console.error('Error during fetch:', e);
-      // Handle fetch error
     }
   };
   
